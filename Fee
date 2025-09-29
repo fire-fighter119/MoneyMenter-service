@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービス・料金 | [あなたのオフィス名や屋号]</title>
+    <style>
+        /* Google Fontsの読み込み */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Shippori+Mincho:wght@500;700&display=swap');
+
+        /* 基本スタイル */
+        body {
+            margin: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FFFFFF;
+            color: #333333;
+            line-height: 1.7;
+        }
+
+        /* --- ヒーローセクション --- */
+        .hero {
+            /* 画像は実際のURLに変更してください */
+            background-image: url('https://storage.googleapis.com/gemini-prod-us-west1-assets/original_images/pexels-christina-morillo-1181673.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            margin: 0;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #D4AF37; /* ゴールド */
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .cta-button:hover {
+            background-color: #c5a031;
+            transform: translateY(-2px);
+        }
+
+        /* --- セクション共通スタイル --- */
+        .section {
+            padding: 70px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Shippori Mincho', serif;
+            font-size: 2.2rem;
+            color: #0D2C54; /* 濃い青 */
+            margin-bottom: 15px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- サービス内容セクション --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: #0D2C54;
+            border-bottom: 2px solid #D4AF37;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* --- 料金プランセクション --- */
+        #plans {
+            background-color: #f9f9f9;
+        }
+        .plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .plan-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px 35px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            background-color: white;
+            transition: box-shadow 0.3s;
+        }
+        .plan-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .plan-card.recommended {
+            border: 2px solid #D4AF37;
+            background-color: #fffaf0;
+        }
+        .plan-card h3 {
+            font-size: 1.4rem;
+            color: #0D2C54;
+            margin-top: 0;
+        }
+        .price {
+            font-size: 2.2em;
+            color: #0D2C54;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .price span {
+            font-size: 0.5em;
+            font-weight: normal;
+        }
+        .price.recommended-price {
+            font-size: 3em;
+            color: #D4AF37;
+        }
+        .plan-card ul {
+            text-align: left;
+            list-style: '✓  ';
+            padding-left: 20px;
+            line-height: 1.9;
+            margin-top: 25px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .plan-button {
+            display: block;
+            background-color: #0D2C54;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .plan-button.recommended-button {
+            background-color: #D4AF37;
+        }
+        .plan-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* --- フッター --- */
+        .footer {
+            background-color: #0D2C54;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- レスポンシブ対応 --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ヒーローセクション -->
+    <header class="hero">
+        <h1>1時間の対話で、<br>お金の不安を「未来への自信」に。</h1>
+        <p>資産運用特化FPによる、あなたのためのマネーコンサルティング</p>
+        <a href="#plans" class="cta-button">▼ まずは無料で相談してみる</a>
+    </header>
+
+    <main>
+        <!-- サービス内容セクション -->
+        <section class="section">
+            <h2 class="section-title">サービス内容</h2>
+            <p class="section-subtitle">あなたの「分からない」を「できる」に変える4つのサポート</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>📈 資産運用コンサルティング</h3>
+                    <p>投資の「怖い」「難しい」を解消します。NISA・iDeCoの最適な活用法から、あなたに合った金融商品の選び方まで、専門知識を分かりやすく解説します。</p>
+                </div>
+                <div class="service-card">
+                    <h3>🏡 家計まるごと診断</h3>
+                    <p>なぜかお金が貯まらない原因を突き止めます。お金の流れを「見える化」し、無理なく続けられる貯蓄の仕組み作りをサポートします。</p>
+                </div>
+                <div class="service-card">
+                    <h3>🛡️ 保険・固定費の最適化</h3>
+                    <p>本当に必要な保障だけを残し、通信費など毎月の支出を徹底的に見直します。月々の削減が、将来の大きな資産に繋がります。</p>
+                </div>
+                <div class="service-card">
+                    <h3>❔ お金のよろず相談</h3>
+                    <p>住宅ローン、教育資金、老後の生活費など、ライフプランに関わるあらゆるお金の疑問にお答えします。漠然とした不安を、具体的な数字で解消しましょう。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 料金プランセクション -->
+        <section id="plans" class="section">
+            <h2 class="section-title">料金プラン</h2>
+            <p class="section-subtitle">無理な勧誘は一切行いません。安心してご自身の状況をお聞かせください。</p>
+            <div class="plans-container">
+                <!-- 無料相談カード -->
+                <div class="plan-card recommended">
+                    <h3>初回限定 無料相談</h3>
+                    <p class="price recommended-price">0<span>円</span></p>
+                    <p style="font-weight: bold; color: #333; margin-top: -20px;">/ 60分</p>
+                    <ul>
+                        <li>FP相談が初めての方</li>
+                        <li>まずは話を聞いてみたい方</li>
+                        <li>漠然としたお悩みを整理したい方</li>
+                    </ul>
+                    <a href="#" class="plan-button recommended-button">このプランで予約する</a>
+                </div>
+                <!-- 個別相談カード -->
+                <div class="plan-card">
+                    <h3>個別コンサルティング</h3>
+                    <p class="price">10,000<span>円</span></p>
+                    <p style="font-weight: bold; color: #333; margin-top: -20px;">/ 60分 (税込)</p>
+                    <ul>
+                        <li>具体的な運用プランが欲しい方</li>
+                        <li>NISA等の銘柄選定を相談したい方</li>
+                        <li>家計を本気で改善したい方</li>
+                    </ul>
+                    <a href="#" class="plan-button">このプランで予約する</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <p>© 2025 [ここにあなたのオフィス名や屋号] All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
