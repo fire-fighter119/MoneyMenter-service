@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyMenter | あなたの未来を共に育てるパートナー</title>
+    <title>MoneyMentor | あなたの未来を共に育てるパートナー</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,7 +113,7 @@
 
     <header id="header" class="bg-[#F8F7F4]/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-bold text-slate-800">Moneymenter</a>
+            <a href="#hero" class="text-2xl font-bold text-slate-800">MoneyMentor</a>
             <div class="hidden md:flex space-x-8">
                 <a href="#difference" class="nav-link text-slate-600 font-medium">私たちの約束</a>
                 <a href="#pricing" class="nav-link text-slate-600 font-medium">独自の料金体系</a>
@@ -129,9 +129,14 @@
                 <h1 class="text-4xl md:text-6xl font-bold text-slate-800 leading-tight text-shadow">あなたのお金、未来を共に育てるパートナー</h1>
                 <p class="mt-6 text-lg md:text-2xl text-slate-600">資産形成の<span class="font-bold text-orange-500">「モヤモヤ」</span>を<span class="font-bold text-orange-500">「ワクワク」</span>に変える、新しいFPのカタチ。</p>
                 <p class="mt-8 text-slate-500 max-w-2xl mx-auto">お金に関するお悩み、人生の相談、まずは気軽にお聞かせください。私たちが、あなたの人生に寄り添うメンターになります。</p>
-                <a href="#contact" class="mt-12 inline-block bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
-                    まずは無料初回相談へ
-                </a>
+                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contact" class="inline-block w-full sm:w-auto bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                        無料初回相談へ
+                    </a>
+                    <a href="#pricing" class="inline-block w-full sm:w-auto bg-white text-orange-500 font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-50 transition duration-300 border border-orange-500">
+                        個別コンサルへ
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -151,7 +156,7 @@
                         </div>
                     </div>
                     <div class="card p-8 border-t-4 border-orange-500 fade-in">
-                        <h3 class="text-2xl font-bold text-slate-800 mb-4">MoneyMenter</h3>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">MoneyMentor</h3>
                          <div class="space-y-4 text-slate-600">
                             <p class="flex items-start"><span class="text-green-500 font-bold mr-3 mt-1">✓</span><span class="font-semibold">特定商品に縛られない、完全中立なアドバイス。</span></p>
                             <p class="flex items-start"><span class="text-green-500 font-bold mr-3 mt-1">✓</span><span class="font-semibold">「価値を感じた時」だけ支払う、新しい料金体系。</span></p>
@@ -216,11 +221,11 @@
             <div class="container mx-auto px-6">
                  <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-800">私たちが目指す未来</h2>
-                    <p class="mt-4 text-slate-500 max-w-3xl mx-auto">私たちのゴールは、あなたを「経済的自由」へ導くこと。そして、その成功の輪を次の世代へと繋げていくことです。あなたの支払う「納得の報酬」が、大きな未来への投資になります。</p>
+                    <p class="mt-4 text-slate-500 max-w-3xl mx-auto">私たちのゴールは、あなたを「経済的自立」へ導くこと。そして、その成功の輪を次の世代へと繋げていくことです。あなたの支払う「納得の報酬」が、大きな未来への投資になります。</p>
                 </div>
 
                 <div class="card max-w-4xl mx-auto p-8 md:p-12 mb-10 fade-in">
-                    <h3 class="text-2xl font-bold text-center mb-2 text-slate-800">あなたを「経済的自由」へ導く</h3>
+                    <h3 class="text-2xl font-bold text-center mb-2 text-slate-800">あなたを「経済的自立」へ導く</h3>
                     <p class="text-center text-slate-500 mb-8">働かなくても資産が増え続ける、経済的自由のフェーズへ。この公式の可能性を、スライダーを動かして体感してください。</p>
                     <div class="text-center font-mono p-4 bg-slate-100 rounded-lg text-slate-700 text-lg md:text-xl">
                         収入 − 支出 + (資産 × 運用利回り)
@@ -229,15 +234,15 @@
                         <div class="space-y-4">
                             <div>
                                 <label class="flex justify-between font-medium"><span>月間収入</span><span id="income-value" class="font-bold text-orange-500"></span></label>
-                                <input id="income-slider" type="range" min="20" max="100" value="40" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <input id="income-slider" type="range" min="20" max="120" value="40" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
                             </div>
                             <div>
                                 <label class="flex justify-between font-medium"><span>月間支出</span><span id="spending-value" class="font-bold text-orange-500"></span></label>
-                                <input id="spending-slider" type="range" min="10" max="60" value="25" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <input id="spending-slider" type="range" min="10" max="120" value="25" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
                             </div>
                              <div>
                                 <label class="flex justify-between font-medium"><span>総資産</span><span id="assets-value" class="font-bold text-orange-500"></span></label>
-                                <input id="assets-slider" type="range" min="0" max="5000" value="500" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                                <input id="assets-slider" type="range" min="0" max="20000" value="500" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
                             </div>
                         </div>
                         <div class="text-center bg-slate-50 p-6 rounded-lg">
@@ -272,6 +277,9 @@
                      <a href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/2fa3674a" class="inline-block bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
                         無料初回相談を予約する
                     </a>
+                      <a href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/836b275f" class="inline-block bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
+                        個別コンサルを予約する
+                    </a>
                 </div>
                 <div class="mt-12 flex justify-center items-center space-x-6 text-slate-500">
                     <a href="#" class="hover:text-orange-500">🌐 ウェブサイト</a>
@@ -286,7 +294,7 @@
     
     <footer class="bg-slate-800 text-slate-400 py-8">
         <div class="container mx-auto px-6 text-center text-sm">
-            <p>&copy; 2025 MoneyMenter. All Rights Reserved.</p>
+            <p>&copy; 2025 MoneyMentor. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -427,3 +435,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
