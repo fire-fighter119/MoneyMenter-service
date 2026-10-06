@@ -1,445 +1,200 @@
-<!DOCTYPE html>
-<html lang="ja" class="scroll-smooth">
+<!doctype html>
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoneyMentor | あなたの未来を共に育てるパートナー</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutral Harmony -->
-    <!-- Application Structure Plan: The SPA is designed with a thematic, single-page scrolling structure instead of a linear slideshow. A sticky navigation bar allows users to jump to key sections like 'Our Philosophy' or 'Unique Pricing'. This non-linear approach empowers users to explore the most relevant information at their own pace, enhancing comprehension and engagement. Key concepts, such as the payment rules and the 'Infinite Household Budget', are transformed into interactive modules to make complex information tangible and memorable. -->
-    <!-- Visualization & Content Choices: 
-        - Report Info: Unique Pricing Rules -> Goal: Clearly explain the two conditions for payment -> Viz/Presentation Method: Interactive Diagram with two toggle switches -> Interaction: Users click the toggles for 'Profit' and 'Satisfaction' to see when payment is triggered -> Justification: Actively engaging with the rules solidifies understanding far better than passively reading them. -> Library/Method: Vanilla JS, HTML/CSS.
-        - Report Info: "Infinite Household Budget" concept -> Goal: Demonstrate the cycle of wealth growth -> Viz/Presentation Method: Interactive Flowchart with sliders -> Interaction: Users adjust sliders for 'Income', 'Spending', and 'Assets' to see the formula's results change in real-time -> Justification: This transforms an abstract formula into a dynamic model, showing users the potential impact of their financial decisions. -> Library/Method: Vanilla JS, HTML/CSS.
-        - Report Info: Comparison of FP models -> Goal: Highlight Money Mentor's unique value -> Viz/Presentation Method: Side-by-side card layout -> Interaction: Static display for easy comparison -> Justification: A clean, direct visual comparison is the most effective way to communicate differentiation. -> Library/Method: HTML/Tailwind CSS.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: #F8F7F4;
-            color: #383838;
-        }
-        .text-shadow {
-            text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
-        }
-        .card {
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #F97316;
-            transition: width 0.3s ease;
-        }
-        .nav-link.active, .nav-link:hover {
-            color: #F97316;
-        }
-        .nav-link.active::after, .nav-link:hover::after {
-            width: 100%;
-        }
-        .toggle-switch {
-            width: 60px;
-            height: 32px;
-            background-color: #D1D5DB;
-            border-radius: 9999px;
-            position: relative;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .toggle-switch.active {
-            background-color: #22C55E;
-        }
-        .toggle-switch::before {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background-color: white;
-            border-radius: 9999px;
-            top: 4px;
-            left: 4px;
-            transition: transform 0.3s ease;
-        }
-        .toggle-switch.active::before {
-            transform: translateX(28px);
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .slider-thumb::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #F97316;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-        .slider-thumb::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #F97316;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#245476">
+<title>相談・料金のご案内 | MoneyMentor</title>
+<meta name="description" content="初回相談は無料・60分。個別相談の内容、料金、お支払いの条件と相談の流れをご案内します。">
+<meta property="og:title" content="相談・料金のご案内 | MoneyMentor">
+<meta property="og:description" content="初回相談は無料・60分。個別相談の内容、料金、お支払いの条件と相談の流れをご案内します。">
+<meta property="og:image" content="https://fire-fighter119.github.io/MoneyMenter-service/assets/brand-header.png">
+<link rel="icon" href="assets/owl.png">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <header id="header" class="bg-[#F8F7F4]/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-bold text-slate-800">MoneyMentor</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#difference" class="nav-link text-slate-600 font-medium">私たちの約束</a>
-                <a href="#pricing" class="nav-link text-slate-600 font-medium">独自の料金体系</a>
-                <a href="#philosophy" class="nav-link text-slate-600 font-medium">目指す未来</a>
-                <a href="#contact" class="nav-link text-slate-600 font-medium">最初の一歩</a>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section id="hero" class="relative bg-white py-20 md:py-32">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-slate-800 leading-tight text-shadow">
-                    <br>あなたのお金</br>
-                    <br>未来を共に育てる</br>
-                    <br>パートナー</br>
-                </h1>
-                <p class="mt-6 text-lg md:text-2xl text-slate-600 text-left">資産形成の<span class="font-bold text-orange-500">「モヤモヤ」</span>を<span class="font-bold text-orange-500">「ワクワク」</span>に変える、新しいFPのカタチ。</p>
-                <p class="mt-8 text-slate-500 max-w-2xl mx-auto text-left">お金に関するお悩み、人生の相談、まずは気軽にお聞かせください。私たちが、あなたの人生に寄り添うメンターになります。</p>
-                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#contact" class="inline-block w-full sm:w-auto bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
-                        無料初回相談へ
-                    </a>
-                    <a href="#pricing" class="inline-block w-full sm:w-auto bg-white text-orange-500 font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-50 transition duration-300 border border-orange-500">
-                        個別コンサルへ
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="difference" class="py-20 md:py-28">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">私たちの約束</h2>
-                    <p class="mt-4 text-slate-500 max-w-3xl mx-auto text-left">従来のFPの「矛盾」から、私たちは生まれました。あなたの利益を最優先に考え、人生全体の豊かさを追求する。それが私たちの揺るぎない約束です。</p>
-                </div>
-                <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                    <div class="card p-8 border-t-4 border-slate-300 fade-in">
-                        <h3 class="text-2xl font-bold text-slate-500 mb-4">従来のFP</h3>
-                        <div class="space-y-4 text-slate-600">
-                            <p class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>金融商品の販売手数料が収益源になることも。</span></p>
-                            <p class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>「お金に困っている人」から相談料をいただく矛盾。</span></p>
-                            <p class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>短期的なアドバイスに留まることがある。</span></p>
-                        </div>
-                    </div>
-                    <div class="card p-8 border-t-4 border-orange-500 fade-in">
-                        <h3 class="text-2xl font-bold text-slate-800 mb-4">MoneyMentor</h3>
-                         <div class="space-y-4 text-slate-600">
-                            <p class="flex items-start"><span class="text-green-500 font-bold mr-3 mt-1">✓</span><span class="font-semibold">特定商品に縛られない、完全中立なアドバイス。</span></p>
-                            <p class="flex items-start"><span class="text-green-500 font-bold mr-3 mt-1">✓</span><span class="font-semibold">「価値を感じた時」だけ支払う、新しい料金体系。</span></p>
-                            <p class="flex items-start"><span class="text-green-500 font-bold mr-3 mt-1">✓</span><span class="font-semibold">人生に寄り添い、長期的な関係性を築くメンター。</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="pricing" class="py-20 md:py-28 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">独自の料金体系</h2>
-                    <p class="mt-4 text-slate-500 max-w-3xl mx-auto text-left">私たちは、あなたの「成果」と「納得感」にコミットします。だから、支払いは後でいい。この仕組みが、安心して相談できる関係を築くと信じています。</p>
-                </div>
-                <div class="card max-w-4xl mx-auto p-8 md:p-12 fade-in">
-                    <div class="text-center">
-                        <p class="text-lg text-slate-500">基本料金: 1回</p>
-                        <p class="text-5xl font-bold text-slate-800 my-2">10,000<span class="text-2xl">円</span></p>
-                    </div>
-                    <div class="my-8 text-center bg-orange-50 border-l-4 border-orange-500 text-orange-800 p-6 rounded-r-lg">
-                        <p class="font-bold text-xl">支払いは今じゃない。</p>
-                        <p class="text-lg tect-left">
-                            <span>あなたが「価値」を</span>
-                            <span>感じた時、でいい。</span>
-                        </p>
-                    </div>
-                    <p class="text-Left text-slate-600 mb-10">お支払いは、以下の<span class="font-bold">2つの条件が揃った時</span>だけ。インタラクティブな図で、このユニークな仕組みを体験してみてください。</p>
-                    
-                    <div class="bg-slate-50 p-6 md:p-8 rounded-lg">
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <div class="space-y-6">
-                                <div>
-                                    <label for="profit-toggle" class="font-bold text-slate-700 flex items-center justify-between">
-                                        <span>ルール1: 1万円以上の「利益」</span>
-                                        <div id="profit-toggle" class="toggle-switch"></div>
-                                    </label>
-                                    <p class="text-sm text-slate-500 mt-2">相談によって、貯蓄が増えるなど1万円以上の実際の利益が出ましたか？</p>
-                                </div>
-                                <div>
-                                    <label for="satisfaction-toggle" class="font-bold text-slate-700 flex items-center justify-between">
-                                        <span>ルール2: あなたの「納得感」</span>
-                                        <div id="satisfaction-toggle" class="toggle-switch"></div>
-                                    </label>
-                                    <p class="text-sm text-slate-500 mt-2">1万円を払う価値があった、と心から納得できましたか？</p>
-                                </div>
-                            </div>
-                            <div id="payment-result" class="text-center p-6 rounded-lg transition-all duration-500 ease-in-out">
-                                <div id="payment-icon" class="text-6xl mb-4 transition-transform duration-500"></div>
-                                <p id="payment-text" class="text-xl font-bold"></p>
-                                <p id="payment-subtext" class="text-slate-500"></p>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="mt-8 text-sm text-slate-500 space-y-2">
-                        <p>※ 未払いについて: 複数回ご相談いただき未払い額が累積しても、ご納得いただけない限り借金として回収することは絶対にありません。</p>
-                        <p>※ 私の願い: あなたが経済的に余裕ができ、「1万円をポンと出せる状態」になるまで、一緒に伴走させてください。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="philosophy" class="py-20 md:py-28">
-            <div class="container mx-auto px-6">
-                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">私たちが目指す未来</h2>
-                    <p class="mt-4 text-slate-500 max-w-3xl mx-auto">私たちのゴールは、あなたを「経済的自立」へ導くこと。そして、その成功の輪を次の世代へと繋げていくことです。あなたの支払う「納得の報酬」が、大きな未来への投資になります。</p>
-                </div>
-
-                <div class="card max-w-4xl mx-auto p-8 md:p-12 mb-10 fade-in">
-                    <h3 class="text-2xl font-bold text-center mb-2 text-slate-800">あなたを「経済的自立」へ導く</h3>
-                    <p class="text-center text-slate-500 mb-8">働かなくても資産が増え続ける、経済的自由のフェーズへ。この公式の可能性を、スライダーを動かして体感してください。</p>
-                    <div class="text-center font-mono p-4 bg-slate-100 rounded-lg text-slate-700 text-lg md:text-xl">
-                        収入−支出+(資産×年利)
-                    </div>
-                    <div class="mt-8 grid md:grid-cols-2 gap-8 items-center">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="flex justify-between font-medium"><span>月間収入</span><span id="income-value" class="font-bold text-orange-500"></span></label>
-                                <input id="income-slider" type="range" min="20" max="120" value="40" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
-                            </div>
-                            <div>
-                                <label class="flex justify-between font-medium"><span>月間支出</span><span id="spending-value" class="font-bold text-orange-500"></span></label>
-                                <input id="spending-slider" type="range" min="10" max="120" value="25" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
-                            </div>
-                             <div>
-                                <label class="flex justify-between font-medium"><span>総資産</span><span id="assets-value" class="font-bold text-orange-500"></span></label>
-                                <input id="assets-slider" type="range" min="0" max="20000" value="500" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer slider-thumb">
-                            </div>
-                        </div>
-                        <div class="text-center bg-slate-50 p-6 rounded-lg">
-                            <p class="text-slate-500">月々の資産増加額</p>
-                            <p id="monthly-growth" class="text-4xl font-bold text-green-600 my-2"></p>
-                            <p class="text-slate-500">資産所得が支出を</p>
-                            <p id="freedom-status" class="text-2xl font-bold text-slate-800"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card max-w-4xl mx-auto p-8 md:p-12 fade-in">
-                     <h3 class="text-2xl font-bold text-center mb-2 text-slate-800">世代を超えて紡ぐビジョン</h3>
-                    <p class="text-center text-slate-500 max-w-2xl mx-auto text-left">あなたの「納得の報酬」は、私個人のためだけではありません。それは、10年後、15年後に新たな講師を育て、より多くの人を助けるための資金となります。私がこの世を去った後も「無償で次世代に知恵を渡し続ける仕組み」を確立することが、私の最終目標です。</p>
-                    <div class="w-full text-center mt-8 text-5xl text-orange-400">
-                        <span>🌱</span>
-                        <span class="text-slate-300 mx-2">→</span>
-                        <span>🌳</span>
-                        <span class="text-slate-300 mx-2">→</span>
-                        <span>🏞️</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="contact" class="py-20 md:py-28 bg-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-800">さあ、あなたの未来を「ワクワク」させませんか？</h2>
-                <p class="mt-4 text-slate-500 max-w-3xl mx-auto">あなたの資産形成、そして豊かな人生へ、新しい一歩を踏み出しましょう。お金の話でなくても、人生の悩み、雑談など、お気軽にご連絡ください。</p>
-                <div class="mt-12">
-                     <a href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/2fa3674a" class="inline-block bg-orange-500 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
-                        無料初回相談を予約する
-                    </a>
-                      <a href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/836b275f" class="inline-block bg-white text-orange-500 font-bold py-4 px-10 rounded-full text-lg shadow-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105">
-                        個別コンサルを予約する
-                    </a>
-                </div>
-                <div class="mt-12 flex justify-center items-center space-x-6 text-slate-500">
-                    <a href="#" class="hover:text-orange-500">🌐 ウェブサイト</a>
-                    <span>|</span>
-                    <a href="#" class="hover:text-orange-500">📧 メール</a>
-                    <span>|</span>
-                    <a href="#" class="hover:text-orange-500">📱 SNS</a>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="bg-slate-800 text-slate-400 py-8">
-        <div class="container mx-auto px-6 text-center text-sm">
-            <p>&copy; 2025 MoneyMentor. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-    const sections = document.querySelectorAll('main section');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === entry.target.id) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-
-    const fadeElements = document.querySelectorAll('.fade-in');
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.2 });
-
-    fadeElements.forEach(el => {
-        fadeObserver.observe(el);
-    });
-
-    const profitToggle = document.getElementById('profit-toggle');
-    const satisfactionToggle = document.getElementById('satisfaction-toggle');
-    const paymentResult = document.getElementById('payment-result');
-    const paymentIcon = document.getElementById('payment-icon');
-    const paymentText = document.getElementById('payment-text');
-    const paymentSubtext = document.getElementById('payment-subtext');
-
-    function updatePaymentStatus() {
-        const profit = profitToggle.classList.contains('active');
-        const satisfaction = satisfactionToggle.classList.contains('active');
-        
-        paymentResult.classList.remove('bg-slate-200', 'bg-green-100', 'bg-yellow-100');
-
-        if (profit && satisfaction) {
-            paymentResult.classList.add('bg-green-100');
-            paymentIcon.textContent = '🎉';
-            paymentText.textContent = 'お支払いをお願いします';
-            paymentSubtext.textContent = 'あなたの未来への投資に感謝します。';
-            paymentIcon.style.transform = 'scale(1.2) rotate(10deg)';
-        } else if (!profit && !satisfaction) {
-            paymentResult.classList.add('bg-slate-200');
-            paymentIcon.textContent = '🤔';
-            paymentText.textContent = 'まだその時じゃない';
-            paymentSubtext.textContent = '焦らずいきましょう。';
-            paymentIcon.style.transform = 'scale(1)';
-        } else {
-            paymentResult.classList.add('bg-yellow-100');
-            paymentIcon.textContent = '⏳';
-            paymentText.textContent = 'あともう一歩！';
-            paymentSubtext.textContent = '2つの条件が揃うのを待ちましょう。';
-            paymentIcon.style.transform = 'scale(1)';
-        }
-    }
-
-    profitToggle.addEventListener('click', () => {
-        profitToggle.classList.toggle('active');
-        updatePaymentStatus();
-    });
-    satisfactionToggle.addEventListener('click', () => {
-        satisfactionToggle.classList.toggle('active');
-        updatePaymentStatus();
-    });
-    
-    updatePaymentStatus();
-
-    const incomeSlider = document.getElementById('income-slider');
-    const spendingSlider = document.getElementById('spending-slider');
-    const assetsSlider = document.getElementById('assets-slider');
-    const incomeValue = document.getElementById('income-value');
-    const spendingValue = document.getElementById('spending-value');
-    const assetsValue = document.getElementById('assets-value');
-    const monthlyGrowth = document.getElementById('monthly-growth');
-    const freedomStatus = document.getElementById('freedom-status');
-    const annualYield = 0.05;
-
-    function formatYen(value) {
-        return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(value);
-    }
-
-    function calculateInfiniteHousehold() {
-        const income = parseInt(incomeSlider.value) * 10000;
-        const spending = parseInt(spendingSlider.value) * 10000;
-        const assets = parseInt(assetsSlider.value) * 10000;
-
-        incomeValue.textContent = formatYen(income);
-        spendingValue.textContent = formatYen(spending);
-        assetsValue.textContent = formatYen(assets);
-        
-        const surplus = income - spending;
-        const investmentReturn = (assets * annualYield) / 12;
-        const totalGrowth = surplus + investmentReturn;
-        
-        monthlyGrowth.textContent = formatYen(totalGrowth);
-
-        if (investmentReturn > spending) {
-            freedomStatus.textContent = '上回っています！';
-            freedomStatus.classList.remove('text-slate-800', 'text-red-600');
-            freedomStatus.classList.add('text-green-600');
-        } else {
-            const percentage = Math.round((investmentReturn / spending) * 100);
-            freedomStatus.textContent = `支出の${percentage}%をカバー`;
-            freedomStatus.classList.remove('text-green-600');
-            freedomStatus.classList.add('text-slate-800');
-        }
-    }
-
-    [incomeSlider, spendingSlider, assetsSlider].forEach(slider => {
-        slider.addEventListener('input', calculateInfiniteHousehold);
-    });
-
-    calculateInfiniteHousehold();
-});
-</script>
+<a class="skip" href="#main">本文へ</a>
+<header class="header">
+<div class="wrap navwrap">
+<a class="brand" href="https://fire-fighter119.github.io/MoneyMenter/" aria-label="MoneyMentor ホーム">
+<img src="assets/owl.png" alt="" width="48" height="48">
+<span>MoneyMentor<small>暮らしとお金の相談室</small>
+</span>
+</a>
+<nav aria-label="メインメニュー">
+<a href="https://fire-fighter119.github.io/MoneyMenter/#topics">相談できること</a>
+<a href="https://fire-fighter119.github.io/MoneyMenter-service/" aria-current="page">相談・料金</a>
+<a href="https://note.com/moneymentor">note</a>
+<a class="navcta" href="https://line.me/R/ti/p/%40408cfpov">LINEで相談</a>
+</nav>
+</div>
+</header>
+<main id="main">
+<section class="page-hero">
+<div class="wrap">
+<p class="eyebrow">CONSULTATION &amp; FEES</p>
+<h1>相談のこと、<br>料金のこと。</h1>
+<p class="lead">気になっていることを整理して、<br>暮らしに合う進め方を一緒に考えます。</p>
+<nav class="anchors" aria-label="このページの内容">
+<a href="#menu">相談メニュー</a>
+<a href="#pricing">お支払いについて</a>
+<a href="#flow">相談の流れ</a>
+<a href="#faq">よくある質問</a>
+</nav>
+</div>
+</section>
+<section class="section" id="menu">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">CONSULTATION</p>
+<h2>まず話す。必要なら、もう少し詳しく。</h2>
+</div>
+<div class="plans">
+<article class="plan">
+<p class="eyebrow">FIRST MEETING</p>
+<h3>初回相談</h3>
+<p class="price">無料 <small>/ 60分</small>
+</p>
+<p>今のお悩みや希望を聞き、何から整理するとよさそうかを一緒に考える時間です。</p>
+<ul>
+<li>相談したいことをお聞きします</li>
+<li>現状と、確認したいことを整理します</li>
+<li>必要に応じて次の相談内容を考えます</li>
+</ul>
+<a class="button " href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/2fa3674a">初回相談を予約する<span aria-hidden="true">↗</span>
+</a>
+<p class="caption">オンライン（Zoom）でお話しします。</p>
+</article>
+<article class="plan featured">
+<p class="eyebrow">FOLLOW-UP MEETING</p>
+<h3>個別相談</h3>
+<p class="price">10,000円 <small>/ 1回・60分</small>
+</p>
+<p>家計や今後の予定をもとに、具体的な選択肢を整理します。状況が変わったときの見直しにも対応します。</p>
+<ul>
+<li>収入・支出と必要な備えの整理</li>
+<li>ライフイベントを踏まえた検討</li>
+<li>貯蓄や資産形成の進め方の整理</li>
+</ul>
+<a class="button " href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/836b275f">個別相談を予約する<span aria-hidden="true">↗</span>
+</a>
+<p class="caption">お支払いは、下記の2つの条件がそろったときです。</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section tinted" id="pricing">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">PAYMENT</p>
+<h2>お支払いについて</h2>
+<p>基本料金は1回10,000円。お支払いは、次の両方がそろったときにお願いしています。</p>
+</div>
+<div class="conditions">
+<article>
+<span>01</span>
+<h3>1万円以上の実際の利益があった</h3>
+<p>相談を通じて、貯蓄が増えるなど、1万円以上の実際の利益が出ていること。</p>
+</article>
+<div class="and">＋<small>両方</small>
+</div>
+<article>
+<span>02</span>
+<h3>支払う価値があったと納得できた</h3>
+<p>ご自身が「1万円を払う価値があった」と感じ、納得できていること。</p>
+</article>
+</div>
+<div class="plain-note">
+<p>どちらか一方だけの場合は、お支払いのタイミングではありません。複数回ご相談いただいた場合も、ご納得いただけない限り、未払い分を借金として回収することはありません。</p>
+<p>「利益」の確認方法やお支払いの時期など、気になる点は相談前にLINEでお聞きください。</p>
+</div>
+</div>
+</section>
+<section class="section" id="flow">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">BEFORE &amp; AFTER</p>
+<h2>相談までの流れ</h2>
+</div>
+<ol class="steps">
+<li>
+<span>1</span>
+<h3>LINEで連絡・日程を予約</h3>
+<p>相談内容をひと言送るか、予約ページで都合のよい日時を選んでください。</p>
+</li>
+<li>
+<span>2</span>
+<h3>分かる範囲で準備</h3>
+<p>気になっていること、毎月の収入・支出、今後の予定など。最初からすべてそろえる必要はありません。</p>
+</li>
+<li>
+<span>3</span>
+<h3>オンラインで話す</h3>
+<p>状況と希望を確認し、次に調べることや取り組めそうなことを整理します。</p>
+</li>
+</ol>
+</div>
+</section>
+<section class="section tinted" id="faq">
+<div class="wrap faq">
+<div class="section-head">
+<p class="eyebrow">QUESTIONS</p>
+<h2>よくある質問</h2>
+</div>
+<details>
+<summary>何を相談すればいいか、まだまとまっていません。</summary>
+<p>「なんとなく将来が心配」「家計を一度見ておきたい」からで大丈夫です。話しながら、気になることを整理していきましょう。</p>
+</details>
+<details>
+<summary>投資を始める前でも相談できますか？</summary>
+<p>もちろんです。投資をするかどうかも含めて、使う予定のお金や日々の家計、値動きへの考え方から確認します。</p>
+</details>
+<details>
+<summary>相談できる範囲を教えてください。</summary>
+<p>家計の整理、ライフプラン、貯蓄や資産形成の基本的な考え方などをお手伝いします。特定の金融商品の購入・売却の指示や、個別の税務・法律判断は扱いません。内容に応じて専門家への確認をご案内します。</p>
+</details>
+<details>
+<summary>知り合いでも相談していいですか？</summary>
+<p>はい。いつもの会話だけでは聞きづらいお金のことも、相談の時間をとってお話しできます。まずはLINEで気軽に声をかけてください。</p>
+</details>
+<details>
+<summary>収入や住まいが変わったときも相談できますか？</summary>
+<p>はい。その時点の収入・支出や予定をもとに、前提を見直します。前の計画に無理に合わせる必要はありません。</p>
+</details>
+</div>
+</section>
+<section class="section">
+<div class="wrap contact">
+<div>
+<p class="eyebrow">CONTACT</p>
+<h2>まずは、気になることから。</h2>
+<p>予約の前に確認したいことがあれば、LINEでどうぞ。</p>
+<div class="buttons">
+<a class="button " href="https://line.me/R/ti/p/%40408cfpov">LINEで質問する<span aria-hidden="true">↗</span>
+</a>
+<a class="button soft" href="https://timerex.net/s/kanki.kanki.kanki.333_a18f/2fa3674a">初回相談を予約する<span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+<a class="text-link" href="https://fire-fighter119.github.io/MoneyMenter/">MoneyMentorについて →</a>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap footer">
+<a class="brand" href="https://fire-fighter119.github.io/MoneyMenter/">
+<img src="assets/owl.png" alt="" width="42" height="42">
+<span>MoneyMentor<small>暮らしとお金を、一緒に考える。</small>
+</span>
+</a>
+<nav aria-label="フッターメニュー">
+<a href="https://fire-fighter119.github.io/MoneyMenter/">ホーム</a>
+<a href="https://fire-fighter119.github.io/MoneyMenter-service/">相談・料金</a>
+<a href="https://note.com/moneymentor">note</a>
+<a href="https://line.me/R/ti/p/%40408cfpov">公式LINE</a>
+</nav>
+<small>© MoneyMentor</small>
+</div>
+</footer>
 </body>
 </html>
-
